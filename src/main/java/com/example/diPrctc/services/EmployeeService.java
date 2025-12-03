@@ -126,9 +126,9 @@ public class EmployeeService {
                     Fetch the existing EmployeeEntity using findById(id).get()
                     Loop through all entries in the 'updates' map
                     For each entry:
-                      - Find the corresponding field in EmployeeEntity using reflection
-                      - Make the field accessible
-                      - Set the new value on the entity
+                      Find the corresponding field in EmployeeEntity using reflection
+                      Make the field accessible
+                      Set the new value on the entity
                     Save the modified entity back to the database using save()
                     Convert the saved entity into EmployeeDTO using modelMapper
                     return map(entity from lastly created. with DTO.class) using modelMapper
