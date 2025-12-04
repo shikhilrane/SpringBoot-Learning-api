@@ -2,6 +2,7 @@ package com.example.diPrctc.controllers;
 
 import com.example.diPrctc.dto.EmployeeDTO;
 import com.example.diPrctc.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/employees/postEmp")
-    public ResponseEntity<EmployeeDTO> postEmpl(@RequestBody EmployeeDTO inputEmployee){
+    public ResponseEntity<EmployeeDTO> postEmpl(@RequestBody @Valid EmployeeDTO inputEmployee){
         EmployeeDTO asveEmployee = employeeService.createNewEmployee(inputEmployee);
         return new ResponseEntity<>(asveEmployee, HttpStatus.CREATED);
     }
