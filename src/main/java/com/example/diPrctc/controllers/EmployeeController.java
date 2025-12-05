@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
     @PutMapping(path = "/employees/{id}")
-    public ResponseEntity<EmployeeDTO> putEmpl(@RequestBody EmployeeDTO employeeDTO, @PathVariable Long id){
+    public ResponseEntity<EmployeeDTO> putEmpl(@RequestBody @Valid EmployeeDTO employeeDTO, @PathVariable Long id){
         EmployeeDTO putDto = employeeService.updateEmployeeById(id, employeeDTO);
         return ResponseEntity.ok(putDto);
     }
@@ -61,7 +61,7 @@ public class EmployeeController {
     }
 
     @PatchMapping(path = "/employees/{id}")
-    public ResponseEntity<EmployeeDTO> patchEmpl(@RequestBody Map<String, Object> updates,
+    public ResponseEntity<EmployeeDTO> patchEmpl(@RequestBody @Valid Map<String, Object> updates,
                                  @PathVariable Long id){
         EmployeeDTO employeeDTO = employeeService.partialUpdate(id, updates);
         if (employeeDTO == null) return ResponseEntity.notFound().build();
