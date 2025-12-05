@@ -1,6 +1,7 @@
 package com.example.diPrctc.controllers;
 
 import com.example.diPrctc.dto.EmployeeDTO;
+import com.example.diPrctc.exceptions.ResourceNotFoundException;
 import com.example.diPrctc.services.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -25,8 +27,13 @@ public class EmployeeController {
         Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(id);
         return employeeDTO
                 .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new ResourceNotFoundException("Employee with given if not found"));
     }
+
+//    @ExceptionHandler(NoSuchElementException.class)
+//    public ResponseEntity<String> handleEmpNotFound(NoSuchElementException exception){
+//        return new ResponseEntity<>("Employee not found for given id", HttpStatus.NOT_FOUND);
+//    }
 
     @GetMapping(path = "/employees")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
